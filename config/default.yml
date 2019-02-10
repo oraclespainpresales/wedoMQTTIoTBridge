@@ -1,0 +1,18 @@
+configdb:
+  host: https://apex.wedoteam.io
+  baseuri: /ords/pdb1/wedo/common
+iot:
+  host: https://iotserver:10443
+  availability:
+    retries: -1 # -1 retries means forever
+    pause: 5 # in seconds
+  usage:
+    timeout: 30 # in minutes
+mqtt:
+  broker: mqtt://infra.wedoteam.io
+  username: iot
+  password: welcome1
+  reconnectPeriod: 1000 # in milliseconds
+  connectTimeout: 30000 # in milliseconds
+  globalTopic: wedo/#
+  qos: 0 # 0: received at most once, 1: received at least once, 2: received exactly once
