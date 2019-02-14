@@ -99,11 +99,6 @@ async.series({
       IOTAVAILABILITYRETRIES = config.get('iot.availability.retries');
       IOTAVAILABILITYPAUSE = config.get('iot.availability.pause');
       IOTUSAGETIMEOUT = config.get('iot.usage.timeout');
-      MQTTBROKER = config.get('mqtt.broker');
-      MQTTUSERNAME = config.get('mqtt.username');
-      MQTTPASSWORD = config.get('mqtt.password');
-      MQTTRECONNECTPERIOD = config.get('mqtt.reconnectPeriod');
-      MQTTCONNECTTIMEOUT = config.get('mqtt.connectTimeout');
       MQTTGLOBALTOPIC = config.get('mqtt.globalTopic');
       MQTTQOS = config.get('mqtt.qos');
 
@@ -122,9 +117,9 @@ async.series({
       next(new Error(util.format("Invalid config file: %s", e.message)));
     }
   },
-  dbconfig: (next) => {
+  deviceConfig: (next) => {
     // Get database config for all demos and demozones
-    log.verbose(MQTT, "Retrieving device info from database...");
+    log.verbose(DATA, "Retrieving device info from database...");
     dbClient = restify.createJsonClient({
       url: APEXHOST,
       connectTimeout: 10000,
@@ -149,6 +144,23 @@ async.series({
         next(new Error("No active devices found in DB. Aborting"));
         return;
       }
+      next();
+    });
+  },
+  mqttConfig: (next) => {
+    const MQTTSETUPURI = "/setup/mqtt";
+    log.verbose(DATA, "Retrieving MQTT broker setup info from database...");
+    dbClient.get(APEXBASEURI + MQTTSETUPURI, function(err, req, res, obj) {
+      if (err) {
+        next(new Error(util.format("Error retrieving MQTT broker setup: %s", err.message)));
+        return;
+      }
+      var config = JSON.parse(res.body);
+      MQTTBROKER = config.broker;
+      MQTTUSERNAME = config.username;
+      MQTTPASSWORD = config.password;
+      MQTTRECONNECTPERIOD = config.reconnectperiod;
+      MQTTCONNECTTIMEOUT = config.connecttimeout;
       next();
     });
   },

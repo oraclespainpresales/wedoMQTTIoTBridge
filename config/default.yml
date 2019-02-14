@@ -9,10 +9,5 @@ iot:
   usage:
     timeout: 30 # in minutes
 mqtt:
-  broker: mqtt://infra.wedoteam.io
-  username: iot
-  password: welcome1
-  reconnectPeriod: 1000 # in milliseconds
-  connectTimeout: 30000 # in milliseconds
   globalTopic: wedo/#
   qos: 0 # 0: received at most once, 1: received at least once, 2: received exactly once
