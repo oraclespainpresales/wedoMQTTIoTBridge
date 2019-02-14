@@ -103,8 +103,7 @@ async.series({
       MQTTQOS = config.get('mqtt.qos');
 
       if ( _.isUndefined(APEXHOST) || _.isUndefined(APEXBASEURI) || _.isUndefined(IOTHOST) || _.isUndefined(IOTAVAILABILITYRETRIES) || _.isUndefined(IOTAVAILABILITYPAUSE) ||
-           _.isUndefined(IOTUSAGETIMEOUT) || _.isUndefined(MQTTBROKER) || _.isUndefined(MQTTUSERNAME) || _.isUndefined(MQTTPASSWORD) || _.isUndefined(MQTTRECONNECTPERIOD) ||
-           _.isUndefined(MQTTCONNECTTIMEOUT) || _.isUndefined(MQTTGLOBALTOPIC) || _.isUndefined(MQTTQOS)) {
+           _.isUndefined(IOTUSAGETIMEOUT) || _.isUndefined(MQTTGLOBALTOPIC) || _.isUndefined(MQTTQOS)) {
         throw new Error("Empty value in config file");
       }
       if ( isNaN(IOTAVAILABILITYRETRIES) || isNaN(IOTAVAILABILITYPAUSE) || isNaN(IOTUSAGETIMEOUT) ||
