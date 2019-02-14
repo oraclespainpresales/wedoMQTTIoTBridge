@@ -106,8 +106,7 @@ async.series({
            _.isUndefined(IOTUSAGETIMEOUT) || _.isUndefined(MQTTGLOBALTOPIC) || _.isUndefined(MQTTQOS)) {
         throw new Error("Empty value in config file");
       }
-      if ( isNaN(IOTAVAILABILITYRETRIES) || isNaN(IOTAVAILABILITYPAUSE) || isNaN(IOTUSAGETIMEOUT) ||
-           isNaN(MQTTRECONNECTPERIOD) || isNaN(MQTTCONNECTTIMEOUT) || isNaN(MQTTQOS)) {
+      if ( isNaN(IOTAVAILABILITYRETRIES) || isNaN(IOTAVAILABILITYPAUSE) || isNaN(IOTUSAGETIMEOUT) || isNaN(MQTTQOS)) {
         throw new Error("Invalid numeric value");
       }
 
