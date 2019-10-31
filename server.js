@@ -19,8 +19,8 @@ const Device = require('./device')
 log.timestamp = true;
 log.level = 'verbose';
 
-//iotcs = iotcs({debug: false});
 // Set DCL defaults
+iotcs = iotcs({debug: false});
 iotcs.oracle.iot.client.device.maximumMessagesToQueue = 10000;
 
 // Main constants
