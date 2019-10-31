@@ -20,7 +20,7 @@ log.timestamp = true;
 log.level = 'verbose';
 
 // Set DCL defaults
-iotcs = iotcs({debug: false});
+//iotcs = iotcs({debug: false});
 iotcs.oracle.iot.client.device.maximumMessagesToQueue = 10000;
 
 // Main constants
