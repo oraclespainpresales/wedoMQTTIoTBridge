@@ -20,6 +20,8 @@ log.timestamp = true;
 log.level = 'verbose';
 
 //iotcs = iotcs({debug: false});
+// Set DCL defaults
+iotcs.oracle.iot.client.device.maximumMessagesToQueue = 10000;
 
 // Main constants
 const PROCESSNAME = "WEDO - IoTCS MQTT Bridge"
@@ -203,10 +205,14 @@ async.series({
           }
         },
         send: (cont) => {
-          if (msg.payload.type.toUpperCase() == 'DATA') {
-            d.device.sendData(msg.payload.urn, msg.payload.payload);
-          } else {
-            d.device.sendAlert(msg.payload.urn, msg.payload.payload);
+          try {
+            if (msg.payload.type.toUpperCase() == 'DATA') {
+              d.device.sendData(msg.payload.urn, msg.payload.payload);
+            } else {
+              d.device.sendAlert(msg.payload.urn, msg.payload.payload);
+            }
+          } catch(e) {
+            log.error(IOTCS, e);
           }
           cont();
         }
